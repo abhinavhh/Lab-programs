@@ -8,7 +8,10 @@ void main()
   printf("\nEnter the sequences : ");
   for(i=0;i<n;i++)
     {
-      scanf("%d",&rq[i];
+      scanf("%d",&rq[i]);
     }
+  printf("\nEnter the initial head position : ");
+  scanf("%d",&initial);
+  for(i=0;i<n;i++)
   
 }
