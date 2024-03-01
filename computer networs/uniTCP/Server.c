@@ -16,13 +16,7 @@ void main(){
     int len=sizeof(cliaddr);
     listen(sd,5);
     nsd=accept(sd,(struct sockaddr*)&cliaddr,&len);
-    do{ printf("\nReceived String : ");
-        recv(nsd,recvmsg,20,0);
-        printf("%s\n",recvmsg);
-        printf("\nEnter the message to send :");
-        fgets(sendmsg,20,stdin);
-        len=strlen(sendmsg);
-        sendmsg[len-1]='\0';
-        send(nsd,sendmsg,20,0);
-    }while((strcmp(recvmsg,"bye"))!=0);
+    printf("\nReceived String : ");
+    recv(nsd,recvmsg,20,0);
+    printf("%s\n",recvmsg);
 }
