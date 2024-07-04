@@ -27,10 +27,14 @@ void main(){
         }
     }
     printf("\nDVT : \n");
+
+    //print heading to represent nodes.
     for(i=0;i<n;i++){
         printf("node%d\t",i+1);
     }
     printf("\n");
+
+    //print the updated distance values b/w each node.
     for(i=0;i<n;i++){
         for(j=0;j<n;j++){
             printf("%d\t",rt[i][j]);
