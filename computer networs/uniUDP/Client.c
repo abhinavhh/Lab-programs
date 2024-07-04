@@ -14,9 +14,8 @@ void main(){
     servaddr.sin_addr.s_addr=INADDR_ANY;
     servaddr.sin_port=htons(33345);
 
-    connect(sockid,(struct sockaddr*)&servaddr,sizeof(servaddr));
 
-    printf("Client : ")
+    printf("Client : ");
     fgets(buffer,30,stdin);
     
     sendto(sockid,buffer,strlen(buffer),0,(struct sockaddr*)&servaddr,sizeof(servaddr));
