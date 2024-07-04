@@ -17,7 +17,7 @@ int main() {
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = INADDR_ANY;
     servaddr.sin_port = htons(PORT);
-
+    //bind socket
     bind(sockid,(struct sockaddr *)&servaddr,sizeof(servaddr));
 
     int len, n;
