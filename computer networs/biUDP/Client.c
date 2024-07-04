@@ -16,7 +16,6 @@ void main(){
     servaddr.sin_addr.s_addr=htonl(INADDR_ANY);
     servaddr.sin_port=htons(33345);
 
-    connect(csd,(struct sockaddr*)&servaddr,sizeof(servaddr));
     int len=sizeof(servaddr);
     do{
         printf("\nClient : ");
