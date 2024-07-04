@@ -1,21 +1,45 @@
 #include<stdio.h>
+#include<string.h>
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<netinet/in.h>
-#include<string.h>
-void main(){
-    int sd,nsd;
-    char sendmsg[30],recvmsg[30];
-    struct sockaddr_in cliaddr,servaddr;
-    sd=socket(AF_INET,SOCK_STREAM,0);
-    servaddr.sin_family=AF_INET;
-    servaddr.sin_addr.s_addr=htonl(INADDR_ANY);
-    servaddr.sin_port=htons(33345);
-    bind(sd,(struct sockaddr*)&servaddr,sizeof(servaddr));
-    int len=sizeof(cliaddr);
-    listen(sd,5);
-    nsd=accept(sd,(struct sockaddr*)&cliaddr,&len);
-    printf("\nReceived String : ");
-    recv(nsd,recvmsg,20,0);
-    printf("%s\n",recvmsg);
+
+void main() {
+	//	SERVER PROGRAM
+	int ssd, len, clilen;
+	struct sockaddr_in cliaddr, servaddr;
+	char sendmsg[30], recvmsg[20];
+	
+	//	SOCKET
+	ssd = socket(AF_INET, SOCK_STREAM, 0);
+	servaddr.sin_family = AF_INET;
+	servaddr.sin_port = htons(33345);
+	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	printf("Listening on port 33345\n");
+
+	//	BIND
+	len = sizeof(servaddr);
+	bind(ssd, (struct sockaddr*)&servaddr, len);
+	
+	//	LISTEN
+	listen(ssd, 5);
+	
+	//	ACCEPT
+	clilen = sizeof(cliaddr);
+	int netSetDestination = accept(ssd, (struct sockaddr*)&cliaddr, &clilen);
+	printf("Client says... \n");
+
+	do {
+		//	RECEIVE
+		recv(netSetDestination, recvmsg, 20, 0);
+		printf("Client: %s\n", recvmsg);
+
+		//	SEND
+		printf("Server: ");
+		fgets(sendmsg, 30, stdin);
+		send(netSetDestination, sendmsg, 20, 0);
+	}
+    while(strncmp(recvmsg,"bye",3)==0);
+	//	CLOSE	
+	// int x = pclose(ssd);
 }
